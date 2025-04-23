@@ -1,1 +1,1 @@
-Gamejam proect 2025
+Gamejam project 2025
