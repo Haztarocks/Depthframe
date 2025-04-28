@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4a24d0e4a28423fb3249b923d7e418, type: 3}
+  m_Name: DepthFrame_ManagerPackage
+  m_EditorClassIdentifier: 
+  actionsManager: {fileID: 11400000, guid: cf7cf3e74ea720042882cfaa768e1127, type: 2}
+  sceneManager: {fileID: 11400000, guid: 8f28af8bca7c2e747bf6d3cd2e4e8623, type: 2}
+  settingsManager: {fileID: 11400000, guid: 959fdcdf63d0b7640903a097d6a5a4db, type: 2}
+  inventoryManager: {fileID: 11400000, guid: 376a6924fc5d5fd47a80801795d4daeb, type: 2}
+  variablesManager: {fileID: 11400000, guid: 2abfc5f51b4ce4b47a21fcecf2d63e33, type: 2}
+  speechManager: {fileID: 11400000, guid: 55fec3bc7b7a8f049bc8169bf7c3bcef, type: 2}
+  cursorManager: {fileID: 11400000, guid: d0574359bd027cb44aa2b2eacc8a89ac, type: 2}
+  menuManager: {fileID: 11400000, guid: 450b5a6c00b10464bb5a4615db451e3d, type: 2}
