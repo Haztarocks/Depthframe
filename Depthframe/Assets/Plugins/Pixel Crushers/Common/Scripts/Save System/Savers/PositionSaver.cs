@@ -181,10 +181,10 @@ namespace PixelCrushers
             var rb2d = GetComponent<Rigidbody2D>();
             if (rb2d != null)
             {
-                var wasKinematic = rb2d.isKinematic;
-                rb2d.isKinematic = true;
+                var wasKinematic = rb2d.bodyType == RigidbodyType2D.Kinematic; // Correct comparison
                 rb2d.position = position;
-                rb2d.isKinematic = wasKinematic;
+                rb2d.SetRotation(rotation);
+                rb2d.bodyType = wasKinematic ? RigidbodyType2D.Kinematic : RigidbodyType2D.Dynamic;
             }
 #endif
             // Set the plain old transform's position:

@@ -27,7 +27,7 @@ namespace CharacterEditor2D.UI
             {
                 return;
             }
-            CharacterViewer[] cvs = Object.FindObjectsOfType<CharacterViewer>();
+            CharacterViewer[] cvs = Object.FindObjectsByType<CharacterViewer>(FindObjectsSortMode.None);
             if (cvs != null && cvs.Length > 0)
             {
                 foreach (CharacterViewer character in cvs)

@@ -48,11 +48,11 @@ namespace AC
 					{
 						EditorGUILayout.HelpBox ("A 2D Kinematic Rigidbody component must be placed on this object.", MessageType.Warning);
 					}
-					else if (_target.GetComponent<Rigidbody2D>() && !_target.GetComponent<Rigidbody2D>().isKinematic)
-					{
-						EditorGUILayout.HelpBox ("This object's 2D Rigidbody component must have 'Is Kinematic' checked.", MessageType.Warning);
-					}
-				}
+                    else if (_target.GetComponent<Rigidbody2D>() && _target.GetComponent<Rigidbody2D>().bodyType != RigidbodyType2D.Kinematic)
+                    {
+                        EditorGUILayout.HelpBox("This object's 2D Rigidbody component must have 'Body Type' set to 'Kinematic'.", MessageType.Warning);
+                    }
+                }
 				else
 				{
 					if (_target.GetComponent <Collider>() == null)

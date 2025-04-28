@@ -81,78 +81,81 @@ namespace AC
 		}
 
 
-		#if NEW_PREFABS
-		private void ManuallyUpdateSceneInstances (ConstantID _target, int fixedID)
-		{
-			int option = EditorUtility.DisplayDialogComplex ("Correct scene instances?", "Unchecking 'Retain in prefab?' will reset IDs for instances of the prefab already present in the scene.  AC can go through your scenes to ensure that they remain as they were, with an ID value of " + fixedID, "Update instances", "Do not update instances", "Cancel");
+        private void ManuallyUpdateSceneInstances(ConstantID _target, int fixedID)
+        {
+            int option = EditorUtility.DisplayDialogComplex(
+                "Correct scene instances?",
+                "Unchecking 'Retain in prefab?' will reset IDs for instances of the prefab already present in the scene. AC can go through your scenes to ensure that they remain as they were, with an ID value of " + fixedID,
+                "Update instances",
+                "Do not update instances",
+                "Cancel"
+            );
 
-			switch (option)
-			{
-				// Update isntances
-				case 0:
-					{
-						string originalScene = UnityVersionHandler.GetCurrentSceneFilepath ();
+            switch (option)
+            {
+                // Update instances
+                case 0:
+                    {
+                        string originalScene = UnityVersionHandler.GetCurrentSceneFilepath();
 
-						if (UnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo ())
-						{
-							string[] sceneFiles = AdvGame.GetSceneFiles ();
-							int numUpdated = 0;
+                        if (UnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+                        {
+                            string[] sceneFiles = AdvGame.GetSceneFiles();
+                            int numUpdated = 0;
 
-							// First look for lines that already have an assigned lineID
-							foreach (string sceneFile in sceneFiles)
-							{
-								UnityVersionHandler.OpenScene (sceneFile);
+                            foreach (string sceneFile in sceneFiles)
+                            {
+                                UnityVersionHandler.OpenScene(sceneFile);
 
-								ConstantID[] constantIDs = FindObjectsOfType (typeof (ConstantID)) as ConstantID[];
-								foreach (ConstantID constantID in constantIDs)
-								{
-									GameObject originalPrefab = PrefabUtility.GetCorrespondingObjectFromSource (constantID.gameObject);
-									if (originalPrefab == _target.gameObject && constantID.constantID == fixedID && constantID.retainInPrefab && constantID.autoManual == AutoManual.Automatic)
-									{
-										constantID.SetManualID (-1); // Necessary to override
-										UnityVersionHandler.SaveScene ();
-										numUpdated++;
+                                // Updated to use Object.FindObjectsByType with FindObjectsSortMode.None
+                                ConstantID[] constantIDs = UnityEngine.Object.FindObjectsByType<ConstantID>(UnityEngine.FindObjectsSortMode.None);
+                                foreach (ConstantID constantID in constantIDs)
+                                {
+                                    GameObject originalPrefab = PrefabUtility.GetCorrespondingObjectFromSource(constantID.gameObject);
+                                    if (originalPrefab == _target.gameObject && constantID.constantID == fixedID && constantID.retainInPrefab && constantID.autoManual == AutoManual.Automatic)
+                                    {
+                                        constantID.SetManualID(-1); // Necessary to override
+                                        UnityVersionHandler.SaveScene();
+                                        numUpdated++;
 
-										constantID.SetManualID (fixedID);
-										UnityVersionHandler.SaveScene ();
-										ACDebug.Log ("Updated " + constantID.gameObject.name + " in scene " + sceneFile);
-									}
-								}
+                                        constantID.SetManualID(fixedID);
+                                        UnityVersionHandler.SaveScene();
+                                        ACDebug.Log("Updated " + constantID.gameObject.name + " in scene " + sceneFile);
+                                    }
+                                }
+                            }
 
-							}
+                            if (string.IsNullOrEmpty(originalScene))
+                            {
+                                UnityVersionHandler.NewScene();
+                            }
+                            else
+                            {
+                                UnityVersionHandler.OpenScene(originalScene);
+                            }
 
-							if (string.IsNullOrEmpty (originalScene))
-							{
-								UnityVersionHandler.NewScene ();
-							}
-							else
-							{
-								UnityVersionHandler.OpenScene (originalScene);
-							}
+                            _target.constantID = 0;
+                            _target.retainInPrefab = false;
+                            AssetDatabase.SaveAssets();
+                            ACDebug.Log("Process complete. " + numUpdated + " scene instance" + ((numUpdated == 1) ? string.Empty : "s") + " updated.");
+                        }
+                    }
+                    break;
 
-							_target.constantID = 0;
-							_target.retainInPrefab = false;
-							AssetDatabase.SaveAssets ();
-							ACDebug.Log ("Process complete. " + numUpdated + " scene instance" + ((numUpdated == 1) ? string.Empty : "s") + " updated.");
-						}
-					}
-					break;
+                // Do not update instances
+                case 1:
+                    _target.constantID = 0;
+                    _target.retainInPrefab = false;
+                    break;
 
-				// Do not update instances
-				case 1:
-					_target.constantID = 0;
-					_target.retainInPrefab = false;
-					break;
-
-				// Cancel
-				default:
-					break;
-			}
-		}
+                // Cancel
+                default:
+                    break;
+            }
+        }
 		#endif
 
 	}
 
 }
 
-#endif

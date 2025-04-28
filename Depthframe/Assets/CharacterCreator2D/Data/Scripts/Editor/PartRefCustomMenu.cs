@@ -50,7 +50,9 @@ namespace CharacterEditor2D
 
         private static void UpdatePartRefererUsageCheckbox()
         {
-            string definesString = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
+            // Updated to use NamedBuildTarget for compatibility with newer Unity versions
+            string definesString = PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(EditorUserBuildSettings.selectedBuildTargetGroup));
+
             Menu.SetChecked(MENU_PARTREFERER_ENABLE, !string.IsNullOrEmpty(definesString) && definesString.Contains(CC2D_RES_SYMBOL));
             EditorApplication.update -= UpdatePartRefererUsageCheckbox;
         }
@@ -86,7 +88,8 @@ namespace CharacterEditor2D
         [MenuItem(MENU_PARTREFERER_ENABLE, false, 220)]
         private static void CheckAddressableUsage()
         {
-            string definesString = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
+            // Updated to use NamedBuildTarget for compatibility with newer Unity versions
+            string definesString = PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(EditorUserBuildSettings.selectedBuildTargetGroup));
             List<string> allDefines = definesString.Split(';').ToList();
             if (allDefines.Contains(CC2D_RES_SYMBOL))
             {
@@ -100,7 +103,8 @@ namespace CharacterEditor2D
                 Menu.SetChecked(MENU_PARTREFERER_ENABLE, true);
                 EditorPrefs.SetBool(CC2D_RES_KEY, true);
             }
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup, string.Join(";", allDefines.ToArray()));
+
+            PlayerSettings.SetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(EditorUserBuildSettings.selectedBuildTargetGroup), string.Join(";", allDefines.ToArray()));
         }
 
         [MenuItem(MENU_PARTREFERER_REFRESH, true, 240)]

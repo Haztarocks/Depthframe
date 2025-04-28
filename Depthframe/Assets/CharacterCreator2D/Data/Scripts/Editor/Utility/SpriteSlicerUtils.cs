@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.U2D.Sprites;
 
 namespace CharacterEditor2D
 {
@@ -14,29 +15,37 @@ namespace CharacterEditor2D
                 TextureImporter sourceti = (TextureImporter)AssetImporter.GetAtPath(sourcePath);
                 TextureImporter targetti = (TextureImporter)AssetImporter.GetAtPath(targetPath);
 
-                //..reset
+                // Reset target texture importer
                 targetti.spriteImportMode = SpriteImportMode.Single;
                 targetti.SaveAndReimport();
-                //reset..
 
+                // Set sprite import mode
                 targetti.spriteImportMode = sourceti.spriteImportMode;
-                List<SpriteMetaData> tempsheet = new List<SpriteMetaData>();
 
-                foreach (SpriteMetaData m in sourceti.spritesheet)
+                // Access sprite metadata using SpriteDataProvider
+                var sourceProvider = GetSpriteEditorDataProvider(sourceti);
+                var sourceSprites = sourceProvider.GetSpriteRects();
+
+                var targetProvider = GetSpriteEditorDataProvider(targetti);
+                var targetSprites = new List<SpriteRect>();
+
+                foreach (var spriteRect in sourceSprites)
                 {
-                    if (contains(m.name, excludedName))
+                    if (contains(spriteRect.name, excludedName))
                         continue;
 
-                    SpriteMetaData tempsmd = new SpriteMetaData();
-                    tempsmd.alignment = m.alignment;
-                    tempsmd.border = new Vector4(m.border.x, m.border.y, m.border.z, m.border.w);
-                    tempsmd.name = m.name;
-                    tempsmd.pivot = new Vector2(m.pivot.x, m.pivot.y);
-                    tempsmd.rect = new Rect(m.rect);
-                    tempsheet.Add(tempsmd);
+                    var newSpriteRect = new SpriteRect
+                    {
+                        alignment = spriteRect.alignment,
+                        border = spriteRect.border,
+                        name = spriteRect.name,
+                        pivot = spriteRect.pivot,
+                        rect = spriteRect.rect
+                    };
+                    targetSprites.Add(newSpriteRect);
                 }
 
-                targetti.spritesheet = tempsheet.ToArray();
+                targetProvider.SetSpriteRects(targetSprites.ToArray());
                 targetti.SaveAndReimport();
 
                 Object[] tobj = AssetDatabase.LoadAllAssetsAtPath(targetPath);
@@ -56,6 +65,29 @@ namespace CharacterEditor2D
             }
         }
 
+        public static List<string> GetSlicedNames(Texture2D texture)
+        {
+            if (texture == null)
+                return new List<string>();
+
+            List<string> val = new List<string>();
+            TextureImporter tempti = (TextureImporter)AssetImporter.GetAtPath(AssetDatabase.GetAssetPath(texture));
+
+            // Access sprite metadata using SpriteDataProvider
+            var provider = GetSpriteEditorDataProvider(tempti);
+            var sprites = provider.GetSpriteRects();
+
+            foreach (var spriteRect in sprites)
+                val.Add(spriteRect.name);
+
+            return val;
+        }
+
+        private static ISpriteEditorDataProvider GetSpriteEditorDataProvider(TextureImporter importer)
+        {
+            return AssetImporter.GetAtPath(importer.assetPath) as ISpriteEditorDataProvider;
+        }
+
         private static bool contains(string value, string[] listVal)
         {
             foreach (string v in listVal)
@@ -65,19 +97,6 @@ namespace CharacterEditor2D
             }
 
             return false;
-        }
-
-        public static List<string> GetSlicedNames(Texture2D texture)
-        {
-            if (texture == null)
-                return new List<string>();
-
-            List<string> val = new List<string>();
-            TextureImporter tempti = (TextureImporter)AssetImporter.GetAtPath(AssetDatabase.GetAssetPath(texture));
-            foreach (SpriteMetaData m in tempti.spritesheet)
-                val.Add(m.name);
-
-            return val;
         }
     }
 }

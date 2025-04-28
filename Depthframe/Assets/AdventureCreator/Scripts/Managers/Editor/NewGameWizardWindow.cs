@@ -535,7 +535,7 @@ namespace AC
 				{
 					EditorUtility.DisplayDialog ("Wizard failed", "The New Game Wizard failed to generate a new 'Manager Package' file with all eight Managers assigned. Check your '/Assets/" + filteredName + "/Managers' directory - the Managers may have been created, and just need assigning in the ManagerPackage asset Inspector, found in '/Assets/" + filteredName + "'.", "OK");
 				}
-				else if (GameObject.FindObjectOfType <KickStarter>() == null)
+                else if (Object.FindFirstObjectByType<KickStarter>() == null)
 				{
 					bool initScene = EditorUtility.DisplayDialog ("Organise scene?", "Process complete.  Would you like to organise the scene objects to begin working?  This can be done at any time within the Scene Manager.", "Yes", "No");
 					if (initScene)

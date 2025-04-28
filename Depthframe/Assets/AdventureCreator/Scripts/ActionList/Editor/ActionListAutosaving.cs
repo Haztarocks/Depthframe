@@ -62,27 +62,28 @@ namespace AC
 		}
 
 
-		private static void AutosaveActions ()
-		{
-			if (EditorApplication.isPlayingOrWillChangePlaymode)
-			{
-				return;
-			}
+        private static void AutosaveActions()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                return;
+            }
 
-			ActionList[] actionLists = UnityEngine.Object.FindObjectsOfType<ActionList> ();
-			if (actionLists.Length == 0)
-			{
-				return;
-			}
+            // Updated to use Object.FindObjectsByType with FindObjectsSortMode.None for better performance
+            ActionList[] actionLists = UnityEngine.Object.FindObjectsByType<ActionList>(UnityEngine.FindObjectsSortMode.None);
+            if (actionLists.Length == 0)
+            {
+                return;
+            }
 
-			ACDebug.Log ("Auto-saving ActionLists.\nThis feature can be amended or disabled in Unity's Project Settings.");
-			JsonAction.CacheSceneObjectReferences ();
-			foreach (ActionList actionList in actionLists)
-			{
-				actionList.BackupData ();
-			}
-			JsonAction.ClearSceneObjectReferencesCache ();
-		}
+            ACDebug.Log("Auto-saving ActionLists.\nThis feature can be amended or disabled in Unity's Project Settings.");
+            JsonAction.CacheSceneObjectReferences();
+            foreach (ActionList actionList in actionLists)
+            {
+                actionList.BackupData();
+            }
+            JsonAction.ClearSceneObjectReferencesCache();
+        }
 
 		#endregion
 

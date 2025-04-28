@@ -19,7 +19,7 @@ namespace PixelCrushers
 #if UNITY_2023_1_OR_NEWER
             return PlayerSettings.GetScriptingDefineSymbols(UnityEditor.Build.NamedBuildTarget.FromBuildTargetGroup(group));
 #else
-            return PlayerSettings.GetScriptingDefineSymbolsForGroup(group);
+            return PlayerSettings.GetScriptingDefineSymbols(group);
 #endif
         }
 

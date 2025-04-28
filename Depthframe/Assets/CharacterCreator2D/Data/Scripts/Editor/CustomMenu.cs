@@ -73,9 +73,11 @@ namespace CharacterEditor2D
         public static void RestoreScene()
         {
             if (EditorApplication.isPlaying) return;
-            if (prevScene == null || prevScene == "")
+            if (string.IsNullOrEmpty(prevScene) || !System.IO.File.Exists(prevScene))
             {
                 EditorApplication.update -= RestoreScene;
+                EditorPrefs.DeleteKey("PlayFromStartPrevScene");
+                EditorPrefs.DeleteKey("PlayFromStartActive");
                 return;
             }
             EditorSceneManager.OpenScene(prevScene);

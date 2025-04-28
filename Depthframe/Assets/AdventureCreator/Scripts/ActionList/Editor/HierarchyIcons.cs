@@ -134,45 +134,47 @@ namespace AC
 		}
 
 
-		private static void GatherIDs (GameObject root = null)
-		{
-			if (!ACEditorPrefs.ShowHierarchyIcons)
-			{
-				return;
-			}
+        private static void GatherIDs(GameObject root = null)
+        {
+            if (!ACEditorPrefs.ShowHierarchyIcons)
+            {
+                return;
+            }
 
-			if (root == null)
-			{
-				actionLists = Object.FindObjectsOfType (typeof (ActionList)) as ActionList[];
-			}
-			else
-			{
-				actionLists = root.GetComponentsInChildren<ActionList> ();
-			}
+            if (root == null)
+            {
+                // Updated to use Object.FindObjectsByType with FindObjectsSortMode.None for better performance
+                actionLists = UnityEngine.Object.FindObjectsByType<ActionList>(UnityEngine.FindObjectsSortMode.None);
+            }
+            else
+            {
+                actionLists = root.GetComponentsInChildren<ActionList>();
+            }
 
-			actionListIDs = new HashSet<int> ();
-			foreach (ActionList actionList in actionLists)
-			{
-				actionListIDs.Add (actionList.gameObject.GetInstanceID ());
-			}
+            actionListIDs = new HashSet<int>();
+            foreach (ActionList actionList in actionLists)
+            {
+                actionListIDs.Add(actionList.gameObject.GetInstanceID());
+            }
 
-			if (root == null)
-			{
-				constantIDs = Object.FindObjectsOfType (typeof (ConstantID)) as ConstantID[];
-			}
-			else
-			{
-				constantIDs = root.GetComponentsInChildren<ConstantID> ();
-			}
+            if (root == null)
+            {
+                // Updated to use Object.FindObjectsByType with FindObjectsSortMode.None for better performance
+                constantIDs = UnityEngine.Object.FindObjectsByType<ConstantID>(UnityEngine.FindObjectsSortMode.None);
+            }
+            else
+            {
+                constantIDs = root.GetComponentsInChildren<ConstantID>();
+            }
 
-			rememberIDs = new HashSet<int> ();
-			foreach (ConstantID constantID in constantIDs)
-			{
-				if (constantID == null || !constantID.isActiveAndEnabled) continue;
+            rememberIDs = new HashSet<int>();
+            foreach (ConstantID constantID in constantIDs)
+            {
+                if (constantID == null || !constantID.isActiveAndEnabled) continue;
 
-				rememberIDs.Add (constantID.gameObject.GetInstanceID ());
-			}
-		}
+                rememberIDs.Add(constantID.gameObject.GetInstanceID());
+            }
+        }
 
 
 		private static void LogPlayModeState (PlayModeStateChange state)
