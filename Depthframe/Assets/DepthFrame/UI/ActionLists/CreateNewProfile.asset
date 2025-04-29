@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CreateNewProfile
   m_EditorClassIdentifier: 
   actions:
-  - {fileID: 3729179668642201184}
+  - {fileID: 4650978278886189559}
   isSkippable: 1
   actionListType: 0
   unfreezePauseMenus: 1
@@ -24,7 +24,7 @@ MonoBehaviour:
   parameters: []
   tagID: 0
   backupData: []
---- !u!114 &3729179668642201184
+--- !u!114 &4650978278886189559
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}

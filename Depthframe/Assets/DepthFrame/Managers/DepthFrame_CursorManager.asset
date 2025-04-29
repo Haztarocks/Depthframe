@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorRendering: 0
   cursorMode: 0
-  uiCursorPrefab: {fileID: 1233823316936846, guid: 2c6562d0c0ae6904788e4dc601e344fb, type: 3}
+  uiCursorPrefab: {fileID: 1233823316936846, guid: e73a8ac51320aa64f9afea754a8326af, type: 3}
   cursorDisplay: 0
   allowMainCursor: 1
   lockSystemCursor: 1
@@ -169,7 +169,27 @@ MonoBehaviour:
     label: Look at
     lineID: -1
     id: 2
-  unhandledCursorInteractions: []
+  - texture: {fileID: 2800000, guid: ebaf3be0b5fc54d4a9fefc94de9d86f2, type: 3}
+    isAnimated: 0
+    numFrames: 1
+    numRows: 1
+    numCols: 1
+    size: 0.015
+    animSpeed: 4
+    endAnimOnLastFrame: 0
+    skipFirstFrameWhenLooping: 0
+    clickOffset: {x: 0, y: 0}
+    frameSpeeds: []
+    alwaysAnimate: 0
+    dontCycle: 0
+    label: Exit
+    lineID: -1
+    id: 3
+  unhandledCursorInteractions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   passUnhandledHotspotAsParameter: 0
   onlyShowCursorLabelOverHotspots: 0
   allowCursorCyclingWhenPaused: 0

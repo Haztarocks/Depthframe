@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b776810ebfa374d7ba8f0fb5ed6e3265, type: 3}
   m_Name: DepthFrame_SettingsManager
   m_EditorClassIdentifier: 
-  separateEditorSaveFiles: 0
-  saveFileName: 
+  separateEditorSaveFiles: 1
+  saveFileName: DepthFrame
   saveTimeDisplay: 0
   customSaveFormat: MMMM dd, yyyy
   takeSaveScreenshots: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
     useSceneDefaultPlayerStart: 0
     startingPlayerStartID: 0
   players: []
-  movementMethod: 0
+  movementMethod: 1
   inputMethod: 0
   simulatedCursorMoveSpeed: 4
   interactionMethod: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   canReorderItems: 0
   selectInventoryDisplay: 0
   rightClickInventory: 0
-  reverseInventoryCombinations: 0
+  reverseInventoryCombinations: 1
   canMoveWhenActive: 1
   selectInvWithUnhandled: 0
   selectInvWithIconID: 0
@@ -152,11 +152,11 @@ MonoBehaviour:
   maxAspectRatio: 2.39
   renderBorderCamera: 1
   landscapeModeOnly: 1
-  cameraPerspective: 2
+  cameraPerspective: 0
   cacheCameraMain: 0
   linearColorTextures: 0
   movingTurning: 3
-  hotspotDetection: 0
+  hotspotDetection: 1
   closeInteractionMenusIfPlayerLeavesVicinity: 0
   placeDistantHotspotsOnSeparateLayer: 1
   hotspotsInVicinity: 0
@@ -207,9 +207,14 @@ MonoBehaviour:
   blackOutWhenInitialising: 1
   spawnPersistentEnginePrefab: 1
   autoCallUnloadUnusedAssets: 1
-  playMusicWhilePaused: 0
+  playMusicWhilePaused: 1
   playAmbienceWhilePaused: 0
-  musicStorages: []
+  musicStorages:
+  - ID: 0
+    label: 
+    audioClip: {fileID: 8300000, guid: 4d76ad576eeb3b744a2472eaeeb113cc, type: 3}
+    relativeVolume: 1
+    overrideMixerGroup: {fileID: 0}
   ambienceStorages: []
   loadAmbienceFadeTime: 0
   crossfadeAmbienceWhenLoading: 0
@@ -217,7 +222,7 @@ MonoBehaviour:
   loadMusicFadeTime: 0
   crossfadeMusicWhenLoading: 0
   restartMusicTrackWhenLoading: 0
-  autoEndOtherMusicWhenPlayed: 1
+  autoEndOtherMusicWhenPlayed: 0
   musicPrefabOverride: {fileID: 0}
   ambiencePrefabOverride: {fileID: 0}
   volumeControl: 0

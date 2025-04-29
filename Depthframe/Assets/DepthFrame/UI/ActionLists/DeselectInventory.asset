@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DeselectInventory
   m_EditorClassIdentifier: 
   actions:
-  - {fileID: 5351373152891647838}
+  - {fileID: 7190671500201532}
   isSkippable: 1
   actionListType: 0
   unfreezePauseMenus: 1
@@ -24,7 +24,7 @@ MonoBehaviour:
   parameters: []
   tagID: 0
   backupData: []
---- !u!114 &5351373152891647838
+--- !u!114 &7190671500201532
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}

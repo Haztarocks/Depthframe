@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: QuitButton
   m_EditorClassIdentifier: 
   actions:
-  - {fileID: 883345429296288506}
+  - {fileID: 7178761045945504759}
   isSkippable: 1
   actionListType: 0
   unfreezePauseMenus: 1
@@ -24,7 +24,7 @@ MonoBehaviour:
   parameters: []
   tagID: 0
   backupData: []
---- !u!114 &883345429296288506
+--- !u!114 &7178761045945504759
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
