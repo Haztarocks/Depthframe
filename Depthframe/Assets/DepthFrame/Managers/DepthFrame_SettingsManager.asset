@@ -74,8 +74,8 @@ MonoBehaviour:
   runConversationsWithKeys: 0
   clickUpInteractions: 0
   defaultMouseClicks: 1
-  allowGameplayDuringConversations: 1
-  walkToHotspotMarkers: 0
+  allowGameplayDuringConversations: 0
+  walkToHotspotMarkers: 1
   dragThreshold: 0
   shareInventory: 0
   inventoryDragDrop: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   stopTurningWhenReleaseInput: 0
   disableMovementWhenInterationMenusAreOpen: 0
   directMovementType: 0
-  limitDirectMovement: 1
+  limitDirectMovement: 0
   cameraLockSnapAngleThreshold: 5
   directMovementPerspective: 0
   destinationAccuracy: 0.8
@@ -122,9 +122,9 @@ MonoBehaviour:
   unityUIClicksAlwaysBlocks: 0
   pathfindUpdateFrequency: 0
   verticalReductionFactor: 0.7
-  rotationsAffectedByVerticalReduction: 0
+  rotationsAffectedByVerticalReduction: 1
   alwaysPathfindInSpriteDirection: 0
-  jumpSpeed: 11.91
+  jumpSpeed: 4
   singleTapStraight: 0
   singleTapStraightPathfind: 0
   clickHoldSeparationStraight: 0.3
@@ -147,7 +147,7 @@ MonoBehaviour:
   touchUpWhenPaused: 0
   touchUpInteractScene: 0
   forceAspectRatio: 0
-  aspectRatioEnforcement: 1
+  aspectRatioEnforcement: 0
   wantedAspectRatio: 1.5
   maxAspectRatio: 2.39
   renderBorderCamera: 1
