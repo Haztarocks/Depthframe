@@ -18,6 +18,7 @@ namespace CharacterCreator2D.UI
 
         private List<string> states = new List<string>();
 
+        [System.Obsolete]
         void Start()
         {            
             dropDown.options.Clear();

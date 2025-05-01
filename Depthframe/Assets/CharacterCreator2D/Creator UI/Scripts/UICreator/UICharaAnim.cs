@@ -16,6 +16,7 @@ namespace CharacterCreator2D.UI
 
         private List<string> states = new List<string>();
 
+        [System.Obsolete]
         void Start()
         {            
             dropDown.options.Clear();
@@ -29,7 +30,7 @@ namespace CharacterCreator2D.UI
                 }
             }
             dropDown.RefreshShownValue();
-            animator = GameObject.FindObjectOfType<CharacterViewer>().GetComponent<Animator>();
+            animator = FindObjectOfType<CharacterViewer>().GetComponent<Animator>();
             _sanim = 0;
             SelectAnimation(_sanim);
         }
