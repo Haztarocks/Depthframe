@@ -34,16 +34,23 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator; // Add this line
 
-    private void Awake()
+private void Awake()
+{
+    rb = GetComponent<Rigidbody2D>();
+    playerCollider = GetComponent<Collider2D>();
+    torchBattery = GetComponent<TorchBattery>(); // Get the TorchBattery component
+    torchOn = false;
+    if (torchLight != null)
     {
-        rb = GetComponent<Rigidbody2D>();
-        playerCollider = GetComponent<Collider2D>();
-        torchBattery = GetComponent<TorchBattery>(); // Get the TorchBattery component
-        torchOn = false;
-        if (torchLight != null)
-            torchLight.enabled = false;
-        animator = GetComponent<Animator>(); // Add this line
+        torchLight.enabled = false;
+        Debug.Log("Torch Light Assigned: " + torchLight.name);
     }
+    else
+    {
+        Debug.Log("Torch Light is missing!");
+    }
+    animator = GetComponent<Animator>(); // Add this line
+}
 
     // Add these methods for the Input System
     public void OnMove(InputAction.CallbackContext context)
@@ -83,9 +90,15 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
+            Debug.Log("Toggle Torch called");
             torchOn = !torchOn;
+            Debug.Log("Torch On: " + torchOn);
             if (torchLight != null && torchBattery != null)
-                torchLight.enabled = torchOn && torchBattery.HasBattery();
+            {
+                bool hasBattery = torchBattery.HasBattery();
+                Debug.Log("Has Battery: " + hasBattery);
+                torchLight.enabled = torchOn && hasBattery;
+            }
         }
     }
 
