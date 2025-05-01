@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal; // Needed for Light2D
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
@@ -18,6 +19,11 @@ public class PlayerController : MonoBehaviour
     public Collider2D standingCollider;
     public Collider2D crouchingCollider;
 
+    [Header("Torch")]
+    public Light2D torchLight; // Assign your Light2D in the Inspector
+    private bool torchOn = false;
+    private TorchBattery torchBattery; // Reference to the new battery script
+
     private Rigidbody2D rb;
     private Collider2D playerCollider;
     private Vector2 moveInput;
@@ -30,6 +36,10 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
+        torchBattery = GetComponent<TorchBattery>(); // Get the TorchBattery component
+        torchOn = false;
+        if (torchLight != null)
+            torchLight.enabled = false;
     }
 
     // Add these methods for the Input System
@@ -42,12 +52,10 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Jump input performed");
             jumpBufferCounter = jumpBufferTime;
         }
         else if (context.canceled && rb.linearVelocity.y > 0)
         {
-            Debug.Log("Jump input canceled while moving up");
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
         }
     }
@@ -68,6 +76,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnToggleTorch(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            torchOn = !torchOn;
+            if (torchLight != null && torchBattery != null)
+                torchLight.enabled = torchOn && torchBattery.HasBattery();
+        }
+    }
+
     private void Update()
     {
         // Ground check using player's collider
@@ -80,7 +98,6 @@ public class PlayerController : MonoBehaviour
             groundCheckDistance, 
             groundLayer
         );
-        Debug.Log("IsGrounded: " + isGrounded);
 
         // Coyote time
         if (isGrounded)
@@ -101,10 +118,20 @@ public class PlayerController : MonoBehaviour
         // Jump if conditions are met
         if (jumpBufferCounter > 0 && coyoteTimeCounter > 0 && !isCrouching)
         {
-            Debug.Log("Jump executed! isGrounded: " + isGrounded + ", coyoteTimeCounter: " + coyoteTimeCounter + ", jumpBufferCounter: " + jumpBufferCounter);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             jumpBufferCounter = 0;
             coyoteTimeCounter = 0;
+        }
+
+        // Torch logic
+        if (torchOn && torchBattery != null)
+        {
+            if (!torchBattery.DrainBattery(Time.deltaTime))
+            {
+                torchOn = false;
+                if (torchLight != null)
+                    torchLight.enabled = false;
+            }
         }
     }
 
