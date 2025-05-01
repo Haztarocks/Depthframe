@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     private float coyoteTimeCounter;
     private float jumpBufferCounter;
 
+    private Animator animator; // Add this line
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,6 +42,7 @@ public class PlayerController : MonoBehaviour
         torchOn = false;
         if (torchLight != null)
             torchLight.enabled = false;
+        animator = GetComponent<Animator>(); // Add this line
     }
 
     // Add these methods for the Input System
@@ -86,6 +89,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private bool isAiming = false;
+
+    // Add this method for the Input System
+    public void OnAimMode(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            isAiming = true;
+            if (animator != null)
+                animator.SetBool("AimMode", true);
+        }
+        else if (context.canceled)
+        {
+            isAiming = false;
+            if (animator != null)
+                animator.SetBool("AimMode", false);
+        }
+    }
+
+    private bool hasFired = false;
+    public float fireRate = 0.25f; // Time in seconds between shots
+    private float fireCooldown = 0f;
+
     private void Update()
     {
         // Ground check using player's collider
@@ -98,6 +124,26 @@ public class PlayerController : MonoBehaviour
             groundCheckDistance, 
             groundLayer
         );
+
+        // Only update aim direction if aiming
+        if (isAiming)
+        {
+            Vector3 mouseScreenPos = Input.mousePosition;
+            mouseScreenPos.z = Mathf.Abs(Camera.main.transform.position.z - transform.position.z); // Ensure correct z for 2D
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
+
+            Vector2 toMouse = mouseWorldPos - transform.position;
+            float verticalAim = toMouse.y;
+
+            // If the mouse is close to the player's y-position, aim front (0)
+            if (Mathf.Abs(verticalAim) < 0.5f)
+                verticalAim = 0f;
+            else
+                verticalAim = Mathf.Clamp(verticalAim, -1f, 1f);
+
+            if (animator != null)
+                animator.SetFloat("Aim", verticalAim);
+        }
 
         // Coyote time
         if (isGrounded)
@@ -133,6 +179,10 @@ public class PlayerController : MonoBehaviour
                     torchLight.enabled = false;
             }
         }
+
+        // Fire cooldown timer
+        if (fireCooldown > 0f)
+            fireCooldown -= Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -140,5 +190,32 @@ public class PlayerController : MonoBehaviour
         // Movement with crouch
         float currentSpeed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
         rb.linearVelocity = new Vector2(moveInput.x * currentSpeed, rb.linearVelocity.y);
+    }
+
+    private void UpdateAim(float aimValue)
+    {
+        if (animator != null)
+            animator.SetFloat("Aim", aimValue);
+    }
+
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        // Only allow firing in AimMode
+        if (!isAiming)
+            return;
+
+        // Only fire if cooldown is zero and input is pressed
+        if (context.started && !hasFired && fireCooldown <= 0f)
+        {
+            hasFired = true;
+            fireCooldown = fireRate;
+            if (animator != null)
+                animator.SetTrigger("Fire"); // Make sure you have a "Fire" trigger in your Animator
+            // Add your firing logic here (e.g., instantiate projectile)
+        }
+        else if (context.canceled)
+        {
+            hasFired = false;
+        }
     }
 }
