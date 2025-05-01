@@ -43,11 +43,6 @@ private void Awake()
     if (torchLight != null)
     {
         torchLight.enabled = false;
-        Debug.Log("Torch Light Assigned: " + torchLight.name);
-    }
-    else
-    {
-        Debug.Log("Torch Light is missing!");
     }
     animator = GetComponent<Animator>(); // Add this line
 }
