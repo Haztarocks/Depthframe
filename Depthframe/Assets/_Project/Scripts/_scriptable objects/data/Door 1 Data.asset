@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b24de2093072242a1d4b107fe258bb, type: 3}
+  m_Name: Door 1 Data
+  m_EditorClassIdentifier: 
+  tooltipText: Door
+  interactionPrompt: Open
+  interactionSound: {fileID: 0}
+  interactionRadius: 2
+  isLocked: 0
+  requiredKeyId: 
+  lockedSound: {fileID: 0}
+  unlockSound: {fileID: 0}
+  openAnimation: {fileID: 0}
+  closeAnimation: {fileID: 0}
