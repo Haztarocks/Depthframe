@@ -158,7 +158,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &276149648
 GameObject:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &276149649
 Transform:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -190,7 +190,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -88.849}
 --- !u!212 &276149650
 SpriteRenderer:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -932,7 +932,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!210 &413555191
 SortingGroup:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -944,7 +944,7 @@ SortingGroup:
   m_SortAtRoot: 0
 --- !u!210 &413555192
 SortingGroup:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -3193,7 +3193,7 @@ MonoBehaviour:
   currentSanity: 0
   sanityDrainRate: 5
   sanityRestoreRate: 3
-  playerLight: {fileID: 0}
+  playerLight: {fileID: 413555195}
 --- !u!1 &1389084726
 GameObject:
   m_ObjectHideFlags: 0
@@ -4398,10 +4398,10 @@ MonoBehaviour:
         z: 11.361464
       Rotation:
         value:
-          x: 0.52805257
-          y: -0.47037047
+          x: 0.5280526
+          y: -0.47037056
           z: 0.47026345
-          w: -0.52798134
+          w: -0.5279814
     - Position:
         x: 234.3775
         y: -172.54622

@@ -17,7 +17,11 @@ MonoBehaviour:
   interactionSound: {fileID: 0}
   interactionRadius: 2
   puzzleTitle: 
-  steps: []
+  steps:
+  - description: 
+    hintText: 
+    requiresItem: 0
+    requiredItemId: 
   completionMessage: 
   successSound: {fileID: 0}
   failureSound: {fileID: 0}
