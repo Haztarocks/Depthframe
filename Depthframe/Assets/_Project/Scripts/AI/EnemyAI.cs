@@ -103,13 +103,16 @@ public class EnemyAI : MonoBehaviour
                 float distanceToTarget = Vector2.Distance(transform.position, target.transform.position);
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask);
                 
-                Debug.Log($"Raycast hit something: {hit.collider != null}"); // Debug raycast results
-
                 if (!hit)
                 {
+                    PlayerStealth playerStealth = target.GetComponent<PlayerStealth>();
+                    if (playerStealth != null)
+                    {
+                        playerStealth.OnSpottedInDarkness();
+                    }
+                    
                     lastKnownPosition = target.transform.position;
                     currentState = AIState.Chase;
-                    Debug.Log("Target detected! Switching to chase state.");
                     return;
                 }
             }
