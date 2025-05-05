@@ -520,7 +520,7 @@ Camera:
   far clip plane: 911.4
   field of view: 20
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -545,7 +545,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.9999998, y: -13.6, z: -10}
+  m_LocalPosition: {x: -289.9475, y: 159.15622, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -642,7 +642,7 @@ Transform:
   m_GameObject: {fileID: 550287679}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.0487366, y: -12.860901, z: -30}
+  m_LocalPosition: {x: -289.9475, y: 159.15622, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -662,7 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SplineSettings:
     Spline: {fileID: 1774504561}
-    Position: 1
+    Position: 0
     Units: 1
   SplineOffset: {x: 0, y: 0, z: 0}
   CameraRotation: 0
@@ -671,17 +671,19 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 0}
     Angular: 0
   AutomaticDolly:
-    Enabled: 0
+    Enabled: 1
     Method:
-      rid: -2
+      rid: 3211182648447992233
   m_LegacyPosition: -1
   m_LegacyUnits: 0
   m_LegacySpline: {fileID: 0}
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 3211182648447992233
+      type: {class: SplineAutoDolly/FixedSpeed, ns: Unity.Cinemachine, asm: Unity.Cinemachine}
+      data:
+        Speed: 0.2
 --- !u!114 &550287682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,8 +697,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Priority:
-    Enabled: 0
-    m_Value: 0
+    Enabled: 1
+    m_Value: 10
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -1676,6 +1678,22 @@ PrefabInstance:
       propertyPath: m_Creator
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8054003937286021839, guid: 0357c2a11b9234e4e97f27c5f22a7860, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[53].x
+      value: 22.265854
+      objectReference: {fileID: 0}
+    - target: {fileID: 8054003937286021839, guid: 0357c2a11b9234e4e97f27c5f22a7860, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[53].y
+      value: 4.5819154
+      objectReference: {fileID: 0}
+    - target: {fileID: 8054003937286021839, guid: 0357c2a11b9234e4e97f27c5f22a7860, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[55].x
+      value: 27.252487
+      objectReference: {fileID: 0}
+    - target: {fileID: 8054003937286021839, guid: 0357c2a11b9234e4e97f27c5f22a7860, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[55].y
+      value: 1.8955443
+      objectReference: {fileID: 0}
     - target: {fileID: 8059730892257445497, guid: 0357c2a11b9234e4e97f27c5f22a7860, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1934,8 +1952,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 519420032}
-  - {fileID: 550287680}
   - {fileID: 1514791035}
+  - {fileID: 550287680}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1214707304
@@ -2305,7 +2323,7 @@ Transform:
   m_GameObject: {fileID: 1514791034}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: -13.6, z: -10}
+  m_LocalPosition: {x: -3.9999998, y: -13.18, z: -20.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2323,7 +2341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraDistance: 10
+  CameraDistance: 20.31
   DeadZoneDepth: 0
   Composition:
     ScreenPosition: {x: 0, y: 0}
@@ -2335,7 +2353,7 @@ MonoBehaviour:
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
-  TargetOffset: {x: 0.97, y: 1.78, z: 0}
+  TargetOffset: {x: 0.97, y: 2.2, z: 0}
   Damping: {x: 2, y: 2, z: 1}
   Lookahead:
     Enabled: 0
@@ -2355,7 +2373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Priority:
-    Enabled: 0
+    Enabled: 1
     m_Value: 0
   OutputChannel: 1
   StandbyUpdate: 2
@@ -2634,10 +2652,10 @@ MonoBehaviour:
         z: 11.361464
       Rotation:
         value:
-          x: 0.5280526
-          y: -0.47037056
+          x: 0.52805257
+          y: -0.47037047
           z: 0.47026345
-          w: -0.5279814
+          w: -0.52798134
     - Position:
         x: 234.3775
         y: -172.54622
