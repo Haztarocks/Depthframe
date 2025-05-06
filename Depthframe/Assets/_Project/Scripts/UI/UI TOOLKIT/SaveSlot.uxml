@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/Scripts/UI/UI%20TOOLKIT/SaveMenu.uss?fileID=7433441132597879392&amp;guid=91c155154f23a2940b1f3a2ef675616c&amp;type=3#SaveMenu" />
+    <engine:VisualElement name="save-slot" class="save-slot">
+        <engine:Label name="slot-number" class="slot-number" />
+        <engine:Label name="save-info" class="save-info" />
+        <engine:Button name="save-button" text="Save" class="slot-button" />
+        <engine:Button name="load-button" text="Load" class="slot-button" />
+        <engine:Button name="delete-button" text="Delete" class="slot-button" />
+    </engine:VisualElement>
+</engine:UXML>

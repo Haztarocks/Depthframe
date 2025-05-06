@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:engine="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements">
+    <engine:VisualElement name="root" style="flex-grow: 1; padding: 20px; background-color: rgba(0, 0, 0, 0.8);">
+        <engine:Label text="Save Game" style="font-size: 24px; color: white; -unity-text-align: center; margin-bottom: 20px;"/>
+        <engine:VisualElement name="slots-container" style="flex-grow: 1;">
+            <!-- Save slots will be generated here -->
+        </engine:VisualElement>
+        <engine:Button text="Close" name="close-button" style="width: 120px; align-self: center; margin-top: 20px;"/>
+    </engine:VisualElement>
+</engine:UXML>
