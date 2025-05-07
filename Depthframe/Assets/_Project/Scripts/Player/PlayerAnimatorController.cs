@@ -10,15 +10,11 @@ public class PlayerAnimationController : MonoBehaviour
     
     [Header("Animation Settings")]
     [SerializeField] private float runAnimationSpeed = 1f;
-    [SerializeField] private float jumpSquashAmount = 0.2f;
-    [SerializeField] private float jumpSquashDuration = 0.2f;
     
     private bool isGrounded;
     private bool isCrouching;
     private Vector2 originalScale;
-    private Sequence jumpSequence;
     private Animator animator;
-    private float currentScaleY;
 
     private void Start()
     {
@@ -34,7 +30,6 @@ public class PlayerAnimationController : MonoBehaviour
 
         animator = GetComponent<Animator>();
         originalScale = transform.localScale;
-        currentScaleY = originalScale.y; // Add this line
     }
 
     private void Update()
@@ -69,11 +64,10 @@ public class PlayerAnimationController : MonoBehaviour
         // Handle jump animation with debug
         if (Input.GetButtonDown("Jump"))
         {
-            Debug.Log("Jump button pressed");
-                Debug.Log("Player is grounded");
+
                 if (!isCrouching)
                 {
-                    Debug.Log("Player can jump (not crouching)");
+
                     PlayJumpAnimation();
                 }
         }
@@ -96,29 +90,15 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void PlayJumpAnimation()
     {
-        Debug.Log("PlayJumpAnimation called");
+
         
-        // Kill any existing jump sequence
-        jumpSequence?.Kill();
-        
-        // Create new jump sequence
-        jumpSequence = DOTween.Sequence();
-        
-        // Trigger jump animation BEFORE squash effect
+        // Simply trigger the jump animation
         animator.SetTrigger("Jump");
-        Debug.Log("Jump trigger set");
-        
-        // Squash effect after setting the trigger
-        jumpSequence.Append(transform.DOScaleY(originalScale.y - jumpSquashAmount, jumpSquashDuration * 0.5f));
-        jumpSequence.Append(transform.DOScaleY(originalScale.y, jumpSquashDuration * 0.5f));
+
     }
 
     public void PlayLandingAnimation()
     {
-        // Play landing squash effect
-        transform.DOScaleY(originalScale.y - jumpSquashAmount * 0.5f, jumpSquashDuration * 0.5f)
-            .OnComplete(() => transform.DOScaleY(originalScale.y, jumpSquashDuration * 0.5f));
-            
         // Return to idle or walk based on movement
         if (Mathf.Abs(rb.linearVelocity.x) > 0.1f)
         {

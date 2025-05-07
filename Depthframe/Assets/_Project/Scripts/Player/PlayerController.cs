@@ -1,3 +1,5 @@
+using System;
+using TMPro.Examples;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal; // Needed for Light2D
@@ -137,18 +139,8 @@ private void Awake()
         if (isAiming)
         {
             Vector3 mouseScreenPos = Input.mousePosition;
-            mouseScreenPos.z = Mathf.Abs(Camera.main.transform.position.z - transform.position.z); // Ensure correct z for 2D
-            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
-
-            Vector2 toMouse = mouseWorldPos - transform.position;
-            float verticalAim = toMouse.y;
-
+            float verticalAim = Mathf.Clamp(mouseScreenPos.y/Screen.height, 0f, 1f);
             // If the mouse is close to the player's y-position, aim front (0)
-            if (Mathf.Abs(verticalAim) < 0.5f)
-                verticalAim = 0f;
-            else
-                verticalAim = Mathf.Clamp(verticalAim, -1f, 1f);
-
             if (animator != null)
                 animator.SetFloat("Aim", verticalAim);
         }

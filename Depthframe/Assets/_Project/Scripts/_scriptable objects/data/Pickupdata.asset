@@ -17,8 +17,8 @@ MonoBehaviour:
   interactionSound: {fileID: 0}
   interactionRadius: 2
   type: 0
-  value: 0
+  value: 25
   itemId: 
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 5856981904466133357, guid: 78f230fed2fd80f49883028f63dd4659, type: 3}
   rotationOffset: {x: 0, y: 0, z: 0}
   positionOffset: {x: 0, y: 0, z: 0}
