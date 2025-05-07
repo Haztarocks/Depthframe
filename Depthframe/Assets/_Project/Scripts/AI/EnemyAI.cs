@@ -94,9 +94,6 @@ public class EnemyAI : MonoBehaviour
         {
             Vector2 directionToTarget = (target.transform.position - transform.position).normalized;
             float angleToTarget = Vector2.Angle(transform.right, directionToTarget);
-            
-            Debug.DrawLine(transform.position, target.transform.position, Color.yellow, 0.1f);
-            Debug.Log($"Angle to target: {angleToTarget}, View Angle: {viewAngle/2}");
 
             if (angleToTarget < viewAngle / 2)
             {

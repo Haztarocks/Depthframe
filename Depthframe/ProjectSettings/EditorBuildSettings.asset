@@ -11,13 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/Intro.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/Level_01_DepthframeEntrance.unity
     guid: 2d872834c349a7d49b2225a9ce19d324
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/Level_02_LabyrinthLower.unity
     guid: 3e5313369f373974f9c97a480f2ad6e8
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/SanctuaryRoom.unity
     guid: d5ebe82684289ee4e99b8b100d72ca9e
   - enabled: 1

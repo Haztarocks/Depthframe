@@ -37,6 +37,12 @@ public class SanitySystem : MonoBehaviour
         SanityChanged?.Invoke(currentSanity);
         
         HandleSanityEffects();
+        
+        // Check for game over condition
+        if (currentSanity <= 0)
+        {
+            SceneManager.Instance.LoadScene("GameOver", true);
+        }
     }
 
     void HandleSanityEffects()
