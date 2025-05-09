@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: abe7b6e9ec727ba47bafce07b485d64d
+guid: bea570dce7e17124caca0a5ec1c79aeb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6875837349981805615
-    second: png-transparent-pda-palm-tx-treo-680-treo-750-palm-inc-bluetooth-electronics-gadget-computer_0
+      213: -184642389985577923
+    second: pda_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: png-transparent-pda-palm-tx-treo-680-treo-750-palm-inc-bluetooth-electronics-gadget-computer_0
+      name: pda_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 920
-        height: 573
+        x: 32
+        y: 9
+        width: 434
+        height: 495
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f2c570bd3a1eb6f50800000000000000
-      internalID: 6875837349981805615
+      spriteID: d343e6e79b4007df0800000000000000
+      internalID: -184642389985577923
       vertices: []
       indices: 
       edges: []

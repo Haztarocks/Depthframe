@@ -71,15 +71,23 @@ private void Awake()
     {
         if (context.performed)
         {
-            isCrouching = true;
-            if (standingCollider != null) standingCollider.enabled = false;
-            if (crouchingCollider != null) crouchingCollider.enabled = true;
-        }
-        else if (context.canceled)
-        {
-            isCrouching = false;
-            if (standingCollider != null) standingCollider.enabled = true;
-            if (crouchingCollider != null) crouchingCollider.enabled = false;
+            isCrouching = !isCrouching; // Toggle crouch state
+            if (isCrouching)
+            {
+                if (standingCollider != null) standingCollider.enabled = false;
+                if (crouchingCollider != null) crouchingCollider.enabled = true;
+            }
+            else
+            {
+                if (standingCollider != null) standingCollider.enabled = true;
+                if (crouchingCollider != null) crouchingCollider.enabled = false;
+            }
+
+            // Update animator crouch state
+            if (animator != null)
+            {
+                animator.SetBool("Crouch", isCrouching); // Use the correct 'Crouch' parameter
+            }
         }
     }
 

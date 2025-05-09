@@ -7,7 +7,11 @@ public class SanityUI : MonoBehaviour
     [Header("UI References")]
     public Image sanityBar;
     public TextMeshProUGUI sanityText;
-    
+    public Image sanityImage; // Add this line
+    public Sprite highSanitySprite; // Add this line
+    public Sprite mediumSanitySprite; // Add this line
+    public Sprite lowSanitySprite; // Add this line
+
     private void OnEnable()
     {
         SanitySystem.SanityChanged += UpdateSanityUI;
@@ -25,5 +29,22 @@ public class SanityUI : MonoBehaviour
             
         if (sanityText != null)
             sanityText.text = $"Sanity: {Mathf.Round(currentSanity)}%";
+
+        // Update the image based on sanity level
+        if (sanityImage != null)
+        {
+            if (currentSanity >= 75)
+            {
+                sanityImage.sprite = highSanitySprite;
+            }
+            else if (currentSanity >= 50)
+            {
+                sanityImage.sprite = mediumSanitySprite;
+            }
+            else
+            {
+                sanityImage.sprite = lowSanitySprite;
+            }
+        }
     }
 }

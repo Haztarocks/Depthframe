@@ -20,6 +20,7 @@ public class SceneManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+                    Debug.Log("SceneManager instance set.");
         }
         else
         {

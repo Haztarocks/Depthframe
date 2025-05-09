@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement; // Add this line to use SceneManager
 
 public class Door : Interactable
 {
     public DoorData doorData; // Reference to the scriptable object
 
     public Animator doorAnimator;
+    public string sceneToLoad; // Add this line to specify the scene name
 
     protected override void Interact()
     {
@@ -12,13 +14,13 @@ public class Door : Interactable
         {
             // Check if player has key
             InventorySystem inventory = Object.FindFirstObjectByType<InventorySystem>();
-            if (inventory != null && inventory.HasItem(doorData.requiredKeyId)) // Use requiredKeyId
+            if (inventory != null && inventory.HasItem(doorData.requiredKeyId))
             {
                 Unlock();
             }
             else
             {
-                uiManager.ShowTooltip("Locked - Need " + doorData.requiredKeyId, transform.position); // Use requiredKeyId
+                uiManager.ShowTooltip("Locked - Need " + doorData.requiredKeyId, transform.position);
             }
         }
         else
@@ -28,6 +30,12 @@ public class Door : Interactable
                 doorAnimator.SetTrigger("Open");
             
             onInteract.Invoke();
+            
+            // Load the specified scene
+            if (!string.IsNullOrEmpty(sceneToLoad))
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad); // Correct usage
+            }
         }
     }
 

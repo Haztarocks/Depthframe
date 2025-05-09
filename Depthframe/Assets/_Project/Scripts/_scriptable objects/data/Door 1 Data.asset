@@ -16,8 +16,8 @@ MonoBehaviour:
   interactionPrompt: Open
   interactionSound: {fileID: 0}
   interactionRadius: 2
-  isLocked: 0
-  requiredKeyId: 
+  isLocked: 1
+  requiredKeyId: 12345
   lockedSound: {fileID: 0}
   unlockSound: {fileID: 0}
   openAnimation: {fileID: 0}

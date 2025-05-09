@@ -37,9 +37,12 @@ public class PlayerAnimationController : MonoBehaviour
         // Handle movement animations
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         
-        // Handle crouch
-        bool crouchInput = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C);
-        HandleCrouch(crouchInput);
+        // Handle crouch toggle
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            isCrouching = !isCrouching;
+            animator.SetBool("Crouch", isCrouching); // Use the existing 'Crouch' parameter
+        }
         
         if (Mathf.Abs(horizontalInput) > 0.1f && !isCrouching)
         {
@@ -64,27 +67,16 @@ public class PlayerAnimationController : MonoBehaviour
         // Handle jump animation with debug
         if (Input.GetButtonDown("Jump"))
         {
-
-                if (!isCrouching)
-                {
-
-                    PlayJumpAnimation();
-                }
+            if (!isCrouching)
+            {
+                PlayJumpAnimation();
+            }
         }
         
         // Handle fall animation
         if (!isGrounded)
         {
             animator.SetBool("Fall", rb.linearVelocity.y < -0.1f);
-        }
-    }
-
-    private void HandleCrouch(bool shouldCrouch)
-    {
-        if (shouldCrouch != isCrouching)
-        {
-            isCrouching = shouldCrouch;
-            animator.SetBool("Crouch", isCrouching);
         }
     }
 

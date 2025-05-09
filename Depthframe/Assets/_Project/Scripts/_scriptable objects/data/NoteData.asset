@@ -16,7 +16,7 @@ MonoBehaviour:
   interactionPrompt: 
   interactionSound: {fileID: 0}
   interactionRadius: 2
-  noteContent: 
+  noteContent: The keycard should be at the top in the tunnels
   noteImage: {fileID: 0}
-  useTypewriterEffect: 0
+  useTypewriterEffect: 1
   typewriterSpeed: 0.05

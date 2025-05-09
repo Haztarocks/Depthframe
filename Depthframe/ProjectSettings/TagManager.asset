@@ -6,6 +6,8 @@ TagManager:
   tags:
   - BackgroundCamera
   - BatteryPickup
+  - Enemy
+  - KeyPickup
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - NavMesh
   - BackgroundImage
   - DistantHotspot
-  - 
+  - Enemy
   - 
   - 
   - 

@@ -28,6 +28,7 @@ public class EnemyAI : MonoBehaviour
     private AIState currentState;
     private Vector3 investigationPoint;
     private float investigationTimer;
+    private float chaseTimer = 0f; // Add this line
 
     private enum AIState
     {
@@ -67,25 +68,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private void Patrol()
-    {
-        if (patrolPoints.Length == 0) return;
-
-        Vector3 targetPosition = patrolPoints[currentPatrolIndex].position;
-        Vector3 direction = (targetPosition - transform.position).normalized;
-        
-        // Update rotation to face movement direction
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-        
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, patrolSpeed * Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
-        {
-            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
-        }
-    }
-
     private void CheckForDetection()
     {
         Collider2D[] targetsInViewRadius = Physics2D.OverlapCircleAll(transform.position, viewRadius, targetMask);
@@ -107,9 +89,16 @@ public class EnemyAI : MonoBehaviour
                     {
                         playerStealth.OnSpottedInDarkness();
                     }
-                    
+
+                    SanitySystem sanitySystem = target.GetComponent<SanitySystem>();
+                    if (sanitySystem != null)
+                    {
+                        sanitySystem.OnEnemyEncounter();
+                    }
+
                     lastKnownPosition = target.transform.position;
                     currentState = AIState.Chase;
+                    chaseTimer = 0f; // Reset chase timer
                     return;
                 }
             }
@@ -118,6 +107,14 @@ public class EnemyAI : MonoBehaviour
 
     private void ChaseTarget()
     {
+        chaseTimer += Time.deltaTime; // Increment chase timer
+
+        if (chaseTimer > 5f) // Limit chase duration to 5 seconds
+        {
+            currentState = AIState.ReturnToPatrol;
+            return;
+        }
+
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
         Vector3 direction = (player.position - transform.position).normalized;
         
@@ -215,6 +212,37 @@ public class EnemyAI : MonoBehaviour
     {
         angleInDegrees += transform.eulerAngles.z;
         return new Vector3(Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0);
+    }
+
+    private void Patrol()
+    {
+        if (patrolPoints.Length == 0) return;
+
+        Transform targetPatrolPoint = patrolPoints[currentPatrolIndex];
+        Vector3 direction = (targetPatrolPoint.position - transform.position).normalized;
+    
+        // Update rotation to face patrol point
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+    
+        transform.position = Vector3.MoveTowards(transform.position, targetPatrolPoint.position, patrolSpeed * Time.deltaTime);
+    
+        if (Vector3.Distance(transform.position, targetPatrolPoint.position) < 0.1f)
+        {
+            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SanitySystem sanitySystem = other.GetComponent<SanitySystem>();
+            if (sanitySystem != null)
+            {
+                sanitySystem.OnEnemyEncounter();
+            }
+        }
     }
 }
 
