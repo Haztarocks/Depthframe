@@ -2,23 +2,23 @@ using UnityEngine;
 
 public class Door : Interactable
 {
-    public bool isLocked = false;
-    public string keyRequired = "";
+    public DoorData doorData; // Reference to the scriptable object
+
     public Animator doorAnimator;
-    
+
     protected override void Interact()
     {
-        if (isLocked)
+        if (doorData.isLocked)
         {
             // Check if player has key
             InventorySystem inventory = Object.FindFirstObjectByType<InventorySystem>();
-            if (inventory != null && inventory.HasItem(keyRequired))
+            if (inventory != null && inventory.HasItem(doorData.requiredKeyId)) // Use requiredKeyId
             {
                 Unlock();
             }
             else
             {
-                uiManager.ShowTooltip("Locked - Need " + keyRequired, transform.position);
+                uiManager.ShowTooltip("Locked - Need " + doorData.requiredKeyId, transform.position); // Use requiredKeyId
             }
         }
         else
@@ -30,10 +30,10 @@ public class Door : Interactable
             onInteract.Invoke();
         }
     }
-    
+
     public void Unlock()
     {
-        isLocked = false;
+        doorData.isLocked = false;
         uiManager.ShowTooltip("Door unlocked!", transform.position);
     }
 }
