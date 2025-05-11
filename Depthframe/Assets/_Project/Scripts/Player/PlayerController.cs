@@ -206,6 +206,9 @@ private void Awake()
             animator.SetFloat("Aim", aimValue);
     }
 
+    // Add this event for enemy awareness
+    public static event Action PlayerFired;
+    
     public void OnFire(InputAction.CallbackContext context)
     {
         // Only allow firing in AimMode
@@ -219,6 +222,10 @@ private void Awake()
             fireCooldown = fireRate;
             if (animator != null)
                 animator.SetTrigger("Fire"); // Make sure you have a "Fire" trigger in your Animator
+                
+            // Broadcast the firing event
+            PlayerFired?.Invoke();
+            
             // Add your firing logic here (e.g., instantiate projectile)
         }
         else if (context.canceled)
