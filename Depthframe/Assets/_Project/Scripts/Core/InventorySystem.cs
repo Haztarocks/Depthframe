@@ -10,12 +10,15 @@ public class InventorySystem : MonoBehaviour
         if (!string.IsNullOrEmpty(itemId))
         {
             inventory.Add(itemId);
+            Debug.Log($"Added item to inventory: {itemId}");
         }
     }
 
     public bool HasItem(string itemId)
     {
-        return inventory.Contains(itemId);
+        bool hasItem = inventory.Contains(itemId);
+        Debug.Log($"Checking inventory for item {itemId}: {hasItem}");
+        return hasItem;
     }
 
     public void RemoveItem(string itemId)

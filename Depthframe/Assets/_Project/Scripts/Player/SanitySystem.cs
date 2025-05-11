@@ -8,10 +8,13 @@ public class SanitySystem : MonoBehaviour
     public float currentSanity;
     public float sanityDrainRate = 5f;
     public float sanityRestoreRate = 3f;
-    public float enemyEncounterSanityLoss = 10f; // Add this line
+    public float enemyEncounterSanityLoss = 10f;
 
     [Header("References")]
     public Light2D playerLight;
+    
+    private PlayerController playerController;
+    private bool isGameOverTriggered = false;
 
     public bool IsInLight => playerLight != null && playerLight.intensity > 0.1f;
 
@@ -21,6 +24,7 @@ public class SanitySystem : MonoBehaviour
     private void Start()
     {
         currentSanity = maxSanity;
+        playerController = GetComponentInParent<PlayerController>();
 
         if (playerLight == null)
         {
@@ -31,7 +35,17 @@ public class SanitySystem : MonoBehaviour
     private void Update()
     {
         if (playerLight == null) return;
-        float delta = Time.deltaTime * (IsInLight ? sanityRestoreRate : -sanityDrainRate);
+        if (isGameOverTriggered) return;
+        
+        // Only restore sanity if torch is on, otherwise always drain
+        bool torchIsOn = false;
+        if (playerController != null && playerController.torchLight != null)
+        {
+            torchIsOn = playerController.torchLight.enabled;
+        }
+        
+        // Always drain sanity unless torch is on AND player is in light
+        float delta = Time.deltaTime * (torchIsOn && IsInLight ? sanityRestoreRate : -sanityDrainRate);
         currentSanity = Mathf.Clamp(currentSanity + delta, 0, maxSanity);
 
         SanityChanged?.Invoke(currentSanity);
@@ -41,9 +55,27 @@ public class SanitySystem : MonoBehaviour
         // Check for game over condition
         if (currentSanity <= 0)
         {
-            Debug.Log("Sanity reached zero, loading GameOver scene.");
+            TriggerGameOver();
+        }
+    }
+
+    private void TriggerGameOver()
+    {
+        if (isGameOverTriggered) return; // Prevent multiple calls
+        
+        isGameOverTriggered = true;
+        Debug.Log("Sanity reached zero, loading GameOver scene.");
+        
+        if (SceneManager.Instance != null)
+        {
+            // Try to load the scene directly if SceneManager instance is available
             SceneManager.Instance.LoadScene("GameOver", true);
-                    Debug.LogError("SceneManager instance is null.");
+        }
+        else
+        {
+            // Fallback to Unity's SceneManager if our custom one is null
+            Debug.LogWarning("Custom SceneManager instance is null, using Unity SceneManager instead.");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
         }
     }
 

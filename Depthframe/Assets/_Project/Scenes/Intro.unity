@@ -3095,6 +3095,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1436269790}
+  - component: {fileID: 1436269791}
   m_Layer: 0
   m_Name: _Pickups
   m_TagString: Untagged
@@ -3122,6 +3123,18 @@ Transform:
   - {fileID: 1190522779}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1436269791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436269789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7a823fe72868c547b8cd68c2e529e52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1458400658 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6321151672147156455, guid: 0357c2a11b9234e4e97f27c5f22a7860, type: 3}
@@ -3367,7 +3380,7 @@ GameObject:
   - component: {fileID: 1715024695}
   m_Layer: 7
   m_Name: Key
-  m_TagString: BatteryPickup
+  m_TagString: KeyPickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3653,7 +3666,7 @@ MonoBehaviour:
         value:
           x: -0.2893848
           y: 0.6454869
-          z: -0.64499086
+          z: -0.6449908
           w: 0.28911936
     - Position:
         x: 148.07751
@@ -3687,10 +3700,10 @@ MonoBehaviour:
         z: 11.361464
       Rotation:
         value:
-          x: 0.52805257
-          y: -0.4703705
-          z: 0.4702634
-          w: -0.5279813
+          x: 0.5280526
+          y: -0.47037056
+          z: 0.47026345
+          w: -0.5279814
     - Position:
         x: 234.3775
         y: -172.54622
@@ -3742,8 +3755,8 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.70710677
-          y: 5.0242954e-15
-          z: -0.00000006322026
+          y: 6.280369e-16
+          z: -0.00000002107342
           w: -0.7071067
     m_MetaData:
     - Mode: 2
@@ -4433,11 +4446,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3208408065482280401, guid: 8bc9a2aeb6cb29a47bdf0bbb862981d1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.409
+      value: 5.4090576
       objectReference: {fileID: 0}
     - target: {fileID: 3208408065482280401, guid: 8bc9a2aeb6cb29a47bdf0bbb862981d1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -305.1747
+      value: -305.17477
       objectReference: {fileID: 0}
     - target: {fileID: 4489078597453927177, guid: 8bc9a2aeb6cb29a47bdf0bbb862981d1, type: 3}
       propertyPath: m_enableAutoSizing
@@ -4675,7 +4688,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5969432834999450901, guid: 8a238dae06b612b408096c19f29e4931, type: 3}
       propertyPath: currentSanity
-      value: 0
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969432834999450901, guid: 8a238dae06b612b408096c19f29e4931, type: 3}
+      propertyPath: sanityDrainRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969432834999450901, guid: 8a238dae06b612b408096c19f29e4931, type: 3}
+      propertyPath: sanityRestoreRate
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969432834999450901, guid: 8a238dae06b612b408096c19f29e4931, type: 3}
+      propertyPath: enemyEncounterSanityLoss
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6398174386652196322, guid: 8a238dae06b612b408096c19f29e4931, type: 3}
       propertyPath: jumpForce
