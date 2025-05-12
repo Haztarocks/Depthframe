@@ -22,111 +22,49 @@ public class EnemyAI : MonoBehaviour
     public float investigationDuration = 5f;
     public float investigationSpeed = 2.5f;
 
-    [Header("Flee Settings")]
-    public float fleeSpeed = 5f;
-    public float fleeDuration = 3f;
-    public float fleeDistance = 8f;
-    
-    private float fleeTimer = 0f;
-    private Vector3 fleeDirection;
-    
-    private enum AIState
-    {
-        Patrol,
-        Investigate,
-        Chase,
-        ReturnToPatrol,
-        Flee  // Add the new Flee state
-    }
-    
-    private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        currentState = AIState.Patrol;
-        
-        // Subscribe to the player firing event
-        PlayerController.PlayerFired += OnPlayerFired;
-    }
-    
-    private void OnDestroy()
-    {
-        // Unsubscribe from the event when destroyed
-        PlayerController.PlayerFired -= OnPlayerFired;
-    }
-    
-    // Add this method to handle player firing
-    private void OnPlayerFired()
-    {
-        // Only flee if the enemy is close enough to the player
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        if (distanceToPlayer <= viewRadius * 1.5f)
-        {
-            // Set the flee direction away from the player
-            fleeDirection = (transform.position - player.position).normalized;
-            fleeTimer = fleeDuration;
-            currentState = AIState.Flee;
-        }
-    }
-    
     private Transform player;
     private Vector3 lastKnownPosition;
     private float loseInterestTimer;
     private AIState currentState;
     private Vector3 investigationPoint;
     private float investigationTimer;
-    private float chaseTimer = 0f;
-    private float fireCooldown = 0f; // Add this line for the fireCooldown variable
+    private float chaseTimer = 0f; // Add this line
 
+    private enum AIState
+    {
+        Patrol,
+        Investigate,
+        Chase,
+        ReturnToPatrol
+    }
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        currentState = AIState.Patrol;
+    }
 
     private void Update()
     {
-        // Update fire cooldown timer
-        if (fireCooldown > 0f)
-            fireCooldown -= Time.deltaTime;
-            
         switch (currentState)
         {
             case AIState.Patrol:
                 Patrol();
                 CheckForDetection();
                 break;
-                
+
             case AIState.Investigate:
                 Investigate();
                 CheckForDetection();
                 break;
-                
+
             case AIState.Chase:
-                Chase();
+                ChaseTarget();
                 break;
-                
+
             case AIState.ReturnToPatrol:
                 ReturnToPatrol();
                 break;
-                
-            case AIState.Flee:
-                Flee();
-                break;
-        }
-    }
-    
-    // Add this method to handle fleeing behavior
-    private void Flee()
-    {
-        // Update the flee timer
-        fleeTimer -= Time.deltaTime;
-        
-        // Move in the flee direction
-        transform.position += fleeDirection * fleeSpeed * Time.deltaTime;
-        
-        // Update rotation to face away from player
-        float angle = Mathf.Atan2(fleeDirection.y, fleeDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-        
-        // Return to patrol when flee timer expires
-        if (fleeTimer <= 0)
-        {
-            currentState = AIState.ReturnToPatrol;
         }
     }
 
@@ -167,7 +105,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private void Chase()
+    private void ChaseTarget()
     {
         chaseTimer += Time.deltaTime; // Increment chase timer
 

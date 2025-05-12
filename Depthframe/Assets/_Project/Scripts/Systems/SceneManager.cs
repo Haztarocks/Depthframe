@@ -67,8 +67,8 @@ public class SceneManager : MonoBehaviour
         
         currentSceneName = sceneName;
         
-        // Load scene state if exists, but skip for certain scenes
-        if (SaveManager.Instance != null && sceneName != "GameOver" && sceneName != "MainMenu")
+        // Load scene state if exists
+        if (SaveManager.Instance != null)
         {
             if (SaveManager.Instance.DoesSaveExist(0)) // Check default slot or implement scene-specific slots
             {
