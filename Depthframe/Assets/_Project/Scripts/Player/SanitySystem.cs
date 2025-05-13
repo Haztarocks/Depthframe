@@ -68,8 +68,8 @@ public class SanitySystem : MonoBehaviour
         
         if (SceneManager.Instance != null)
         {
-            // Try to load the scene directly if SceneManager instance is available
-            SceneManager.Instance.LoadScene("GameOver", true);
+            // IMPORTANT: Set saveCurrentState to false to prevent saving the current state
+            SceneManager.Instance.LoadScene("GameOver", false);
         }
         else
         {

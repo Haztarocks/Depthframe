@@ -16,7 +16,8 @@ MonoBehaviour:
   interactionPrompt: 
   interactionSound: {fileID: 0}
   interactionRadius: 2
-  noteContent: The keycard should be at the top in the tunnels
+  noteContent: The keycard should be at the bottom of the tunels. Then take the door
+    at the end of the corridor.
   noteImage: {fileID: 0}
   useTypewriterEffect: 1
   typewriterSpeed: 0.05
